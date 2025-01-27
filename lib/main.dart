@@ -15,82 +15,87 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Container(
-        color: Colors.white,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.blue,
+          title: Text(
+            'Tarefas',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        body: ListView(
           children: [
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  color: Colors.red,
-                  width: 100,
-                  height: 100,
-                ),
-                Container(
-                  color: Colors.blue,
-                  width: 50,
-                  height: 50,
-                )
-              ],
-            ),
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  color: Colors.white,
-                  width: 100,
-                  height: 100,
-                ),
-                Container(
-                  color: Colors.red,
-                  width: 50,
-                  height: 50,
-                )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  color: Colors.cyan,
-                  height: 50,
-                  width: 50,
-                ),
-                Container(
-                  color: Colors.pinkAccent,
-                  height: 50,
-                  width: 50,
-                ),
-                Container(
-                  color: Colors.purple,
-                  height: 50,
-                  width: 50,
-                ),
-              ],
+            Task('Aprender Flutter.'),
+            Task('Ler um livro.'),
+            Task('Fazer uma caminhada.'),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Colors.blue, // Cor de fundo
+          shape: CircleBorder(), // Garante o formato circular
+          child: Icon(Icons.add),
+        ),
+      ),
+    );
+  }
+}
+
+class Task extends StatelessWidget {
+  final String nome;
+
+  const Task(this.nome, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        child: Stack(
+          children: [
+            Container(
+              color: Colors.blue,
+              height: 140,
             ),
             Container(
-              color: Colors.amber,
-              height: 30,
-              width: 300,
-              child: Text(
-                'Diamante Amarelo',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 28,
-                ),
-                textAlign: TextAlign.center,
+              color: Colors.white,
+              height: 100,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    color: Colors.black26,
+                    width: 72,
+                    height: 100,
+                  ),
+                  Container(
+                    width: 200,
+                    child: Text(
+                      nome,
+                      style: TextStyle(
+                        fontSize: 24,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        backgroundColor: Colors.blue,
+                      ),
+                      child: Icon(
+                        Icons.arrow_drop_up,
+                        color: Colors.white,
+                      )),
+                ],
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                print('Você apertou o botão');
-              },
-              child: Text('Aperte o botão!'),
-            )
           ],
         ),
       ),
