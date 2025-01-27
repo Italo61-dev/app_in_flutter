@@ -1,0 +1,167 @@
+1. Container
+Você usa o Container em vários pontos para definir dimensões, cores de fundo e layouts:
+
+No Task, o Container é usado para envolver os outros widgets e definir a altura (height) e a cor de fundo (color).
+Exemplo:
+dart
+Copiar
+Editar
+Container(
+  color: Colors.blue, // Cor de fundo
+  height: 140, // Altura
+)
+2. Stack
+Você usa o Stack dentro do Container para empilhar widgets sobrepostos:
+
+Isso permite que você coloque a Container azul (fundo) e a Container branca com a Row e outros widgets sobre ela.
+Exemplo:
+dart
+Copiar
+Editar
+Stack(
+  children: [
+    Container(color: Colors.blue, height: 140),
+    Container(
+      color: Colors.white,
+      height: 100,
+      child: Row(
+        // Conteúdo da Row
+      ),
+    ),
+  ],
+)
+3. Row
+O widget Row é utilizado para organizar os elementos na horizontal dentro do Container branco:
+
+Você alinha os widgets (um Container para o ícone de ação, o nome da tarefa e o ElevatedButton) horizontalmente.
+Propriedades importantes:
+mainAxisAlignment é usado para espaçar os elementos horizontalmente.
+children é a lista de widgets a serem exibidos na linha.
+Exemplo:
+dart
+Copiar
+Editar
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  children: [
+    // Widgets dentro da Row
+  ],
+)
+4. Text e TextStyle
+O widget Text é usado para exibir o nome da tarefa. A propriedade style do Text aplica um TextStyle para configurar a fonte e comportamento do texto.
+
+TextStyle é utilizado para definir o tamanho da fonte, overflow do texto e outras propriedades como cor.
+Exemplo:
+dart
+Copiar
+Editar
+Text(
+  nome,  // Nome da tarefa
+  style: TextStyle(
+    fontSize: 24,  // Tamanho da fonte
+    overflow: TextOverflow.ellipsis,  // Quando o texto ultrapassar o limite, será cortado
+  ),
+)
+5. ElevatedButton
+O ElevatedButton é utilizado para adicionar um botão estilizado com cor de fundo, forma arredondada e um ícone.
+
+Propriedades importantes:
+onPressed define a ação quando o botão é pressionado.
+backgroundColor define a cor do botão.
+shape define o formato arredondado com o borderRadius.
+child contém o ícone que aparece no botão.
+Exemplo:
+dart
+Copiar
+Editar
+ElevatedButton(
+  onPressed: () {},
+  style: ElevatedButton.styleFrom(
+    backgroundColor: Colors.blue,  // Cor do botão
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8),  // Bordas arredondadas
+    ),
+  ),
+  child: Icon(
+    Icons.arrow_drop_up,  // Ícone do botão
+    color: Colors.white,   // Cor do ícone
+  ),
+)
+6. StatelessWidget
+A classe Task é um exemplo de StatelessWidget. Ela define um widget imutável, onde o conteúdo não muda após a construção.
+
+Você passa o nome da tarefa como parâmetro e exibe isso dentro do widget.
+Exemplo:
+dart
+Copiar
+Editar
+class Task extends StatelessWidget {
+  final String nome;  // Tarefa
+
+  const Task(this.nome, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),  // Espaçamento
+      child: Container(
+        // Layout da tarefa
+      ),
+    );
+  }
+}
+7. Padding
+Você usou o widget Padding para adicionar espaçamento interno em volta de cada Task, criando um afastamento entre os itens na lista.
+
+Exemplo:
+dart
+Copiar
+Editar
+Padding(
+  padding: const EdgeInsets.all(8.0),  // Espaçamento
+  child: Container(
+    // Conteúdo da tarefa
+  ),
+)
+8. ListView
+O ListView é utilizado para criar uma lista rolável de tarefas. Ele recebe uma lista de widgets Task como filhos, e cada um exibe uma tarefa diferente.
+
+Exemplo:
+dart
+Copiar
+Editar
+ListView(
+  children: [
+    Task('Aprender Flutter.'),
+    Task('Ler um livro.'),
+    Task('Fazer uma caminhada.'),
+  ],
+)
+9. Scaffold
+O Scaffold é o widget principal da estrutura de layout do Flutter. Ele organiza a AppBar, o body da aplicação e o floatingActionButton.
+
+AppBar: Barra superior que contém o título "Tarefas".
+FloatingActionButton: Botão flutuante que aparece sobre o layout.
+Exemplo:
+dart
+Copiar
+Editar
+home: Scaffold(
+  appBar: AppBar(
+    backgroundColor: Colors.blue,  // Cor de fundo da AppBar
+    title: Text('Tarefas', style: TextStyle(color: Colors.white)),
+  ),
+  body: ListView(
+    children: [
+      Task('Aprender Flutter.'),
+      Task('Ler um livro.'),
+      Task('Fazer uma caminhada.'),
+    ],
+  ),
+  floatingActionButton: FloatingActionButton(
+    onPressed: () {},
+    backgroundColor: Colors.blue,  // Cor do botão
+    shape: CircleBorder(),  // Forma circular
+    child: Icon(Icons.add),
+  ),
+)
