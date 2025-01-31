@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
+          leading: Container(),
           backgroundColor: Colors.blue,
           title: Text(
             'Tarefas',
@@ -90,22 +91,32 @@ class _TaskState extends State<Task> {
                           ),
                         ),
                       ),
-                      ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              nivel++;
-                            });
-                          },
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
+                      Container(
+                        child: ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                nivel++;
+                              });
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              backgroundColor: Colors.blue,
+
                             ),
-                            backgroundColor: Colors.blue,
-                          ),
-                          child: Icon(
-                            Icons.arrow_drop_up,
-                            color: Colors.white,
-                          )),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Icon(
+                                  Icons.arrow_drop_up,
+                                  color: Colors.white,
+                                ),
+                                Text('UP', style: TextStyle(fontSize: 12,color: Colors.white))
+                              ],
+                            )),
+                      ),
                     ],
                   ),
                 ),
