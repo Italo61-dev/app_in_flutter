@@ -43,7 +43,7 @@ Row(
 )
 
 4. Text e TextStyle
-O widget Text é usado para exibir o nome da tarefa. A propriedade style do Text aplica um TextStyle para configurar a fonte e comportamento do texto.
+O widget Text é usado para exibir o nome da tarefa. A pTextStyle para configurar a fonte e comportamento do texto.
 
 TextStyle é utilizado para definir o tamanho da fonte, overflow do texto e outras propriedades como cor.
 Exemplo:
@@ -163,3 +163,90 @@ home: Scaffold(
     child: Icon(Icons.add),
   ),
 )
+
+10. StatefulWidget
+O StatefulWidget é um tipo de widget no Flutter que pode mudar de estado durante a execução do aplicativo. Ele é composto por duas classes:
+
+Classe do Widget: Estende StatefulWidget e é imutável.
+Classe de Estado: Estende State e armazena dados mutáveis.
+
+Estrutura Básica de um StatefulWidget
+
+class MeuWidget extends StatefulWidget {
+  @override
+  _MeuWidgetState createState() => _MeuWidgetState();
+}
+
+class _MeuWidgetState extends State<MeuWidget> {
+  int contador = 0;
+
+  void incrementar() {
+    setState(() {
+      contador++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text('Contador: $contador'),
+        ElevatedButton(
+          onPressed: incrementar,
+          child: Text('Incrementar'),
+        ),
+      ],
+    );
+  }
+}
+
+Características do StatefulWidget
+✔️ Permite alteração de estado com setState()
+✔️ Mantém os dados entre reconstruções
+✔️ Útil para animações, interações do usuário e carregamento de dados
+
+10. Image
+A classe Image é usada para exibir imagens no Flutter. Ela suporta várias fontes de imagem, como assets, rede, memória e arquivos locais.
+
+📌 Modos de Carregamento
+Imagem de Assets (Pasta assets/)
+Image.asset('assets/minha_imagem.png')
+
+Imagem da Internet
+Image.network('https://exemplo.com/imagem.png')
+
+Imagem do Armazenamento Local
+Image.file(File('/caminho/para/imagem.png'))
+
+Imagem da Memória (Bytes)
+Image.memory(Uint8List.fromList(meusBytes))
+
+📌 Propriedades úteis da classe Image
+fit: Ajusta a imagem dentro do espaço disponível (BoxFit.cover, BoxFit.contain, etc.)
+width e height: Definem tamanho específico
+color: Aplica uma cor à imagem
+opacity: Controla a opacidade da imagem
+loadingBuilder: Mostra um indicador de carregamento
+
+📌 Exemplo Completo
+
+Image.network(
+  'https://exemplo.com/imagem.png',
+  width: 200,
+  height: 200,
+  fit: BoxFit.cover,
+  loadingBuilder: (context, child, progress) {
+    if (progress == null) return child;
+    return CircularProgressIndicator();
+  },
+)
+
+
+💡 Dica: Para carregar imagens rapidamente, use precacheImage().
+
+
+
+
+
+
+
