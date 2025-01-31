@@ -1,23 +1,19 @@
-1. Container
+﻿1. Container
 Você usa o Container em vários pontos para definir dimensões, cores de fundo e layouts:
 
 No Task, o Container é usado para envolver os outros widgets e definir a altura (height) e a cor de fundo (color).
 Exemplo:
-dart
-Copiar
-Editar
+
 Container(
   color: Colors.blue, // Cor de fundo
   height: 140, // Altura
 )
+
 2. Stack
 Você usa o Stack dentro do Container para empilhar widgets sobrepostos:
 
 Isso permite que você coloque a Container azul (fundo) e a Container branca com a Row e outros widgets sobre ela.
 Exemplo:
-dart
-Copiar
-Editar
 Stack(
   children: [
     Container(color: Colors.blue, height: 140),
@@ -30,6 +26,7 @@ Stack(
     ),
   ],
 )
+
 3. Row
 O widget Row é utilizado para organizar os elementos na horizontal dentro do Container branco:
 
@@ -38,23 +35,19 @@ Propriedades importantes:
 mainAxisAlignment é usado para espaçar os elementos horizontalmente.
 children é a lista de widgets a serem exibidos na linha.
 Exemplo:
-dart
-Copiar
-Editar
 Row(
   mainAxisAlignment: MainAxisAlignment.spaceBetween,
   children: [
     // Widgets dentro da Row
   ],
 )
+
 4. Text e TextStyle
 O widget Text é usado para exibir o nome da tarefa. A propriedade style do Text aplica um TextStyle para configurar a fonte e comportamento do texto.
 
 TextStyle é utilizado para definir o tamanho da fonte, overflow do texto e outras propriedades como cor.
 Exemplo:
-dart
-Copiar
-Editar
+
 Text(
   nome,  // Nome da tarefa
   style: TextStyle(
@@ -62,6 +55,7 @@ Text(
     overflow: TextOverflow.ellipsis,  // Quando o texto ultrapassar o limite, será cortado
   ),
 )
+
 5. ElevatedButton
 O ElevatedButton é utilizado para adicionar um botão estilizado com cor de fundo, forma arredondada e um ícone.
 
@@ -87,6 +81,7 @@ ElevatedButton(
     color: Colors.white,   // Cor do ícone
   ),
 )
+
 6. StatelessWidget
 A classe Task é um exemplo de StatelessWidget. Ela define um widget imutável, onde o conteúdo não muda após a construção.
 
@@ -110,6 +105,7 @@ class Task extends StatelessWidget {
     );
   }
 }
+
 7. Padding
 Você usou o widget Padding para adicionar espaçamento interno em volta de cada Task, criando um afastamento entre os itens na lista.
 
@@ -123,6 +119,7 @@ Padding(
     // Conteúdo da tarefa
   ),
 )
+
 8. ListView
 O ListView é utilizado para criar uma lista rolável de tarefas. Ele recebe uma lista de widgets Task como filhos, e cada um exibe uma tarefa diferente.
 
@@ -137,6 +134,7 @@ ListView(
     Task('Fazer uma caminhada.'),
   ],
 )
+
 9. Scaffold
 O Scaffold é o widget principal da estrutura de layout do Flutter. Ele organiza a AppBar, o body da aplicação e o floatingActionButton.
 
