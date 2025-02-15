@@ -68,9 +68,7 @@ class _FormScreenState extends State<FormScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   onChanged: (text) {
-                    setState(() {
-
-                    });
+                    setState(() {});
                   },
                   controller: imageController,
                   textAlign: TextAlign.center,
@@ -97,11 +95,10 @@ class _FormScreenState extends State<FormScreen> {
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
                     imageController.text,
-                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace,){
+                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                       return Image.asset('assets/images/nophoto.png');
                     },
                     fit: BoxFit.cover,
-
                   ),
                 ),
               ),
@@ -113,11 +110,7 @@ class _FormScreenState extends State<FormScreen> {
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),
-                onPressed: () {
-                  print(nameController);
-                  print(int.parse(difficultyController.text));
-                  print(imageController);
-                },
+                onPressed: () {},
                 child: Text(
                   'Adicionar',
                 ),
