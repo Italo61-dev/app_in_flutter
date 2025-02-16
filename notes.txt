@@ -244,6 +244,45 @@ Image.network(
 
 💡 Dica: Para carregar imagens rapidamente, use precacheImage().
 
+11. Keyboard type
+o keyboard Type é usado para facilitar a vida do usuário no campo do teclado, de acordo com o formulário:
+    TextFormField(
+        keyboardType: TextInputType.number,
+    ),
+
+12. key
+O key serve para usar em formulário, para impedir de enviá-lo vazio, ele fica de olho no estado, para poder enviar:
+
+    void main(
+    final _formKey = GlobalKey<FormState>();
+    ),
+
+13. Snakbar
+Responsavel por informa que algo foi adicionado, evitadando quer o usuário, adicione a mesma atividade varias vezes:
+Ele pertence ao Scaffold.
+
+ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Nova tarefa adicionada'),
+      ),
+    );
+
+14. SingleChildScrollView
+O SingleChildScrollView é um widget do Flutter usado para permitir rolagem quando o conteúdo excede o tamanho da tela.
+Você envolve ele no container pai, tornando o container filho do SingleChildScrollView. Se a lista for longa, prefira ListView para melhor desempenho.
+
+15. validador
+Aprendemos que é uma prática inadequada enviar nulos em um formulário. Não queremos exibir, por exemplo, uma tarefa sem título ou com outra informação faltando. Para evitar isso, utilizamos o validator - parâmetro do TextFormField. Dentro do validator, criamos uma condição para verificar se o campo contém uma informação ou um nulo.
+
+16. Form
+Para as validações acontecer precisa colocar a função maior como Foem, pois ela que fica de olho.
+Precisa criar uma variavel
+
+    final _formKey = GlobalKey<FormState>();
+
+    Para ela assistir às validações.
+
+
 
 
 
