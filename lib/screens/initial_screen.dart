@@ -1,4 +1,5 @@
 import 'package:first_project/components/task.dart';
+import 'package:first_project/screens/form_screen.dart';
 import 'package:flutter/material.dart';
 
 class InitialScreen extends StatefulWidget {
@@ -9,7 +10,6 @@ class InitialScreen extends StatefulWidget {
 }
 
 class _InitialScreenState extends State<InitialScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,17 +41,26 @@ class _InitialScreenState extends State<InitialScreen> {
             img: 'assets/images/bodybuilder.jpg',
             dificuldade: 2,
           ),
-          SizedBox(height: 80,)
+          SizedBox(
+            height: 80,
+          )
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-
-
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => FormScreen(),
+            ),
+          );
         },
         backgroundColor: Colors.blue,
         shape: CircleBorder(),
-        child: Icon(Icons.remove_red_eye),
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
     );
   }
