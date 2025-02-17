@@ -7,9 +7,9 @@ class Task extends StatefulWidget {
   final int dificuldade;
 
   const Task(
-      {required this.dificuldade,
-        required this.nome,
+      { required this.nome,
         required this.img,
+        required this.dificuldade,
         super.key});
 
   @override
