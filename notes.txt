@@ -335,7 +335,7 @@ Widget build(BuildContext context) {
   );
 }
 
-Em resumo, o BuildContext é uma parte crucial do desenvolvimento em Flutter, pois permite que você acesse recursos e informações relevantes à medida que constrói e gerência widgets na árvore de widgets. ```
+Em resumo, o BuildContext é uma parte crucial do desenvolvimento em Flutter, pois permite que você acesse recursos e informações relevantes à medida que constrói e gerência widgets na árvore de widgets. 
 
 
 
