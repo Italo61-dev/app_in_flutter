@@ -1,9 +1,8 @@
 import 'package:first_project/components/task.dart';
-import 'package:first_project/data/task_inherited.dart';
-import 'package:first_project/screens/form_screen.dart';
 import 'package:flutter/material.dart';
 
 class InitialScreen extends StatefulWidget {
+
   const InitialScreen({super.key});
 
   @override
@@ -11,9 +10,11 @@ class InitialScreen extends StatefulWidget {
 }
 
 class _InitialScreenState extends State<InitialScreen> {
+  bool opacity = true;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       appBar: AppBar(
         leading: Container(),
         backgroundColor: Colors.blue,
@@ -25,22 +26,30 @@ class _InitialScreenState extends State<InitialScreen> {
           ),
         ),
       ),
-      body: ListView(
-        children: TaskInherited.of(context).taskList,
+      body: AnimatedOpacity(
+        opacity: opacity ? 1 : 0,
+        duration: Duration(milliseconds: 800),
+        child: ListView(
+          children: [
+            Task(name: 'Codar',image: 'assets/images/flutter.png',difficulty: 3,),
+            Task(name: 'Ler livro',image: 'assets/images/book.jpg',difficulty: 3,),
+            Task(name: 'Academia',image: 'assets/images/bodybuilder.jpg',difficulty: 2,),
+            SizedBox(height: 80,)
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (contextNew) => FormScreen(taskContext: context,),
-            ),
-          );
-        },
         backgroundColor: Colors.blue,
-        shape: CircleBorder(),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50),
+        ),
+        onPressed: () {
+          setState(() {
+            opacity = !opacity;
+          });
+        },
         child: Icon(
-          Icons.add,
+          Icons.remove_red_eye,
           color: Colors.white,
         ),
       ),
