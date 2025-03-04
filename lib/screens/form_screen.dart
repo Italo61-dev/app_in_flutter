@@ -1,10 +1,7 @@
-import 'package:first_project/data/task_inherited.dart';
 import 'package:flutter/material.dart';
 
 class FormScreen extends StatefulWidget {
-  const FormScreen({Key? key, required this.taskContext}) :super(key:key);
-
-  final BuildContext taskContext;
+  const FormScreen({super.key});
 
   @override
   State<FormScreen> createState() => _FormScreenState();
@@ -14,158 +11,114 @@ class _FormScreenState extends State<FormScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController difficultyController = TextEditingController();
   TextEditingController imageController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Nova tarefa',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        title: const Text(
+          'Nova Tarefa',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
-          backgroundColor: Colors.blue,
         ),
-        body: Center(
-          child: SingleChildScrollView(
-            child: Container(
-              height: 650,
-              width: 365,
-              decoration: BoxDecoration(
-                color: Colors.black12,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(width: 3),
+      ),
+      body: Center(
+        child: Container(
+          width: 390,
+          height: 750,
+          decoration: BoxDecoration(
+            color: Colors.black12,
+            border: Border.all(width: 3),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  textAlign: TextAlign.center,
+                  controller: nameController,
+                  decoration: InputDecoration(
+                    hintText: 'Nome',
+                    fillColor: Colors.white70,
+                    filled: true,
+                    border: OutlineInputBorder(),
+                  ),
+                ),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      validator: (String? value) {
-                        if (value != null && value.isEmpty) {
-                          return 'Insira o nome da tarefa';
-                        }
-                        return null;
-                      },
-                      controller: nameController,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Nome',
-                        fillColor: Colors.white70,
-                        filled: true,
-                      ),
-                    ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  textAlign: TextAlign.center,
+                  controller: difficultyController,
+                  decoration: InputDecoration(
+                    hintText: 'Dificuldade',
+                    fillColor: Colors.white70,
+                    filled: true,
+                    border: OutlineInputBorder(),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value!.isEmpty ||
-                            int.parse(value) > 5 ||
-                            int.parse(value) < 1) {
-                          return 'Insira uma dificuldade entre 1 e 5';
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.number,
-                      controller: difficultyController,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Dificuldade',
-                        fillColor: Colors.white70,
-                        filled: true,
-                      ),
-                    ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  textAlign: TextAlign.center,
+                  controller: imageController,
+                  onChanged: (text) {
+                    setState(() {});
+                  },
+                  decoration: InputDecoration(
+                    hintText: 'Imagem',
+                    fillColor: Colors.white70,
+                    filled: true,
+                    border: OutlineInputBorder(),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Insira uma URL válida';
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.url,
-                      onChanged: (text) {
-                        setState(() {});
-                      },
-                      controller: imageController,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Imagem',
-                        fillColor: Colors.white70,
-                        filled: true,
-                      ),
-                    ),
+                ),
+              ),
+              Container(
+                width: 72,
+                height: 100,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    width: 2,
+                    color: Colors.blue,
                   ),
-                  Container(
-                    height: 100,
-                    width: 72,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                        width: 2,
-                        color: Colors.blue,
-                      ),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.network(
-                        imageController.text,
-                        errorBuilder: (BuildContext context, Object exception,
-                            StackTrace? stackTrace) {
-                          return Image.asset('assets/images/nophoto.png');
-                        },
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                    ),
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        // print(nameController.text);
-                        // print(difficultyController.text);
-                        // print(imageController.text);
-                        TaskInherited.of(widget.taskContext).newTask(
-                          nameController.text,
-                          imageController.text,
-                          int.parse(difficultyController.text),
-                        );
-
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Nova tarefa adicionada'),
-                          ),
-                        );
-                        Navigator.pop(context);
-                      }
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.network(
+                    imageController.text,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset('assets/images/nophoto.png',fit: BoxFit.cover,);
                     },
-                    child: Text(
-                      'Adicionar',
-                    ),
                   ),
-                ],
+                ),
               ),
-            ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                onPressed: () {
+                  print(nameController.text);
+                  print(int.parse(difficultyController.text));
+                  print(imageController.text);
+
+                },
+                child: Text(
+                  'Adicionar',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
           ),
         ),
       ),
