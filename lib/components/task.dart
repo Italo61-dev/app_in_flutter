@@ -2,15 +2,15 @@ import 'package:first_project/components/difficulty.dart';
 import 'package:flutter/material.dart';
 
 class Task extends StatefulWidget {
-  final String nome;
-  final String img;
-  final int dificuldade;
+  final String name;
+  final int difficulty;
+  final String image;
 
   const Task(
-      { required this.nome,
-        required this.img,
-        required this.dificuldade,
-        super.key});
+      {super.key,
+        required this.name,
+        required this.difficulty,
+        required this.image});
 
   @override
   State<Task> createState() => _TaskState();
@@ -18,12 +18,6 @@ class Task extends StatefulWidget {
 
 class _TaskState extends State<Task> {
   int level = 0;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    precacheImage(AssetImage(widget.img), context);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,36 +28,34 @@ class _TaskState extends State<Task> {
           Container(
             height: 140,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              color: Colors.blue,
-            ),
+                color: Colors.blue, borderRadius: BorderRadius.circular(8)),
           ),
           Column(
             children: [
               Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  color: Colors.white,
-                ),
                 height: 100,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: Colors.black26,
-                      ),
-                      width: 77,
+                      width: 80,
                       height: 100,
+                      decoration: BoxDecoration(
+                          color: Colors.black26,
+                          borderRadius: BorderRadius.circular(8)),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(8),
                         child: Image.asset(
-                          widget.img,
+                          widget.image,
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) {
-                            return Icon(Icons.broken_image,
-                                size: 50); // Ícone de erro
+                            return Image.asset(
+                              'assets/images/nophoto.png',
+                              fit: BoxFit.cover,
+                            );
                           },
                         ),
                       ),
@@ -75,51 +67,50 @@ class _TaskState extends State<Task> {
                         SizedBox(
                           width: 200,
                           child: Text(
-                            widget.nome,
+                            widget.name,
                             style: TextStyle(
+                              fontWeight: FontWeight.bold,
                               fontSize: 24,
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ),
-                        Difficulty(difficultyLevel: widget.dificuldade,)
+                        Difficulty(difficultyLevel: widget.difficulty,)
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 6),
-                      child: SizedBox(
-                        width: 65,
-                        height: 53,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                double progress = (widget.dificuldade > 0)
-                                    ? (level / widget.dificuldade) / 10
-                                    : 1;
-                                if (progress < 1) {
-                                  level++;
-                                }
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                        onPressed: () {
+                          setState(() {
+                            double progress = (widget.difficulty > 0)
+                                ? (level / widget.difficulty) / 10
+                                : 1;
+                            if(progress < 1){
+                              level++;
+                            }
+                          });
+                        },
+                        child: SizedBox(
+                          height: 50,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.arrow_drop_up,
+                                color: Colors.white,
                               ),
-                              backgroundColor: Colors.blue,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Icon(
-                                  Icons.arrow_drop_up,
-                                  color: Colors.white,
-                                ),
-                                Text('UP',
-                                    style: TextStyle(
-                                        fontSize: 12, color: Colors.white))
-                              ],
-                            )),
+                              Text(
+                                'UP',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -133,25 +124,25 @@ class _TaskState extends State<Task> {
                     child: SizedBox(
                       width: 200,
                       child: LinearProgressIndicator(
-                        color: Colors.white,
-                        value: (widget.dificuldade > 0)
-                            ? (level / widget.dificuldade) / 10
+                        value: (widget.difficulty > 0)
+                            ? (level / widget.difficulty) / 10
                             : 1,
+                        color: Colors.white,
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'Nivel: $level',
+                      'Nível: $level',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
+                        fontSize: 18,
                       ),
                     ),
-                  ),
+                  )
                 ],
-              ),
+              )
             ],
           ),
         ],
