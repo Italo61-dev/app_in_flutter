@@ -149,8 +149,14 @@ class _FormScreenState extends State<FormScreen> {
                       ),
                     ),
                     onPressed: () {
-                        if(_formkey.currentState!.validate()){}
-
+                      if (_formkey.currentState!.validate()) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Tarefa adicionada'),
+                          ),
+                        );
+                        Navigator.pop(context);
+                      }
                     },
                     child: Text(
                       'Adicionar',
