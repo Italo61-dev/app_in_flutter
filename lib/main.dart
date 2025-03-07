@@ -1,4 +1,5 @@
 
+import 'package:first_project/data/task_inherited.dart';
 import 'package:first_project/screens/form_screen.dart';
 import 'package:first_project/screens/form_screen_test.dart';
 import 'package:first_project/screens/initial_screen.dart';
@@ -26,7 +27,8 @@ class _MyAppState extends State<MyApp> {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: FormScreenTest(), //TaskInherited(child: const InitialScreen()),
+        // ele tem quer ficar como pai para poder fazer o list ser global
+        home: TaskInherited (child: const InitialScreen()),
         );
   }
 }
