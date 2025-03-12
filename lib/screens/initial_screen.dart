@@ -1,4 +1,3 @@
-import 'package:first_project/components/task.dart';
 import 'package:first_project/data/task_inherited.dart';
 import 'package:first_project/screens/form_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +10,8 @@ class InitialScreen extends StatefulWidget {
 }
 
 class _InitialScreenState extends State<InitialScreen> {
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +27,7 @@ class _InitialScreenState extends State<InitialScreen> {
         ),
       ),
       body: ListView(
+        padding: EdgeInsets.only(top: 8, bottom: 90),
         children:
           TaskInherited.of(context).taskList,
 
@@ -37,7 +39,7 @@ class _InitialScreenState extends State<InitialScreen> {
         ),
         onPressed: () {
           setState(() {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => FormScreen()));
+            Navigator.push(context, MaterialPageRoute(builder: (contextNew) => FormScreen(taskContext: context,)));
           });
         },
         child: Icon(
