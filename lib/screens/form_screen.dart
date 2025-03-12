@@ -1,7 +1,10 @@
+import 'package:first_project/data/task_inherited.dart';
 import 'package:flutter/material.dart';
 
 class FormScreen extends StatefulWidget {
-  const FormScreen({super.key});
+  const FormScreen({super.key, required this.taskContext});
+
+  final BuildContext taskContext;
 
   @override
   State<FormScreen> createState() => _FormScreenState();
@@ -12,15 +15,22 @@ class _FormScreenState extends State<FormScreen> {
   TextEditingController difficultyController = TextEditingController();
   TextEditingController imageController = TextEditingController();
   final _formkey = GlobalKey<FormState>();
-
-  @override
-  void dispose() {
-    nameController.dispose();
-    difficultyController.dispose();
-    imageController.dispose();
-
-    super.dispose();
+  bool valueValidator(String? value){
+    if(value != null && value.isEmpty){
+      return true;
+    }
+    return false;
   }
+  bool difficultyValidator(String? value){
+    if(value != null && value.isEmpty){
+      if(int.parse(value) > 5 ||
+          int.parse(value) < 1){
+        return true;
+      }
+    }
+    return false;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +65,7 @@ class _FormScreenState extends State<FormScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       validator: (String? value) {
-                        if (value != null && value.isEmpty) {
+                        if (valueValidator(value)) {
                           return 'Insira o nome da TAREFA!';
                         }
                         return null;
@@ -75,9 +85,7 @@ class _FormScreenState extends State<FormScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       validator: (value) {
-                        if (value!.isEmpty ||
-                            int.parse(value) > 5 ||
-                            int.parse(value) < 1) {
+                        if (difficultyValidator(value)) {
                           return 'Insira o nível de DIFICULDADE!';
                         }
                         return null;
@@ -97,7 +105,7 @@ class _FormScreenState extends State<FormScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       validator: (value) {
-                        if (value!.isEmpty) {
+                        if (valueValidator(value)) {
                           return 'Insira a URL DA IMAGEM!';
                         }
                         return null;
@@ -150,6 +158,10 @@ class _FormScreenState extends State<FormScreen> {
                     ),
                     onPressed: () {
                       if (_formkey.currentState!.validate()) {
+                        TaskInherited.of(widget.taskContext).newTask(
+                            nameController.text,
+                            int.parse(difficultyController.text),
+                            imageController.text);
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text('Tarefa adicionada'),
